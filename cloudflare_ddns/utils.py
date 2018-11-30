@@ -1,18 +1,10 @@
 import inspect
-import json
 from contextlib import suppress
 from functools import wraps
-from pathlib import Path
 # noinspection PyProtectedMember
 from typing import Any, Dict, Optional, _SpecialForm
 
-__all__ = ["load_json", "get_str", "enforce_types"]
-
-
-def load_json(path: Path) -> Dict[str, Any]:
-    # noinspection PyTypeChecker
-    with open(path, "r", encoding="utf-8") as file:
-        return json.load(file)
+__all__ = ["get_str", "enforce_types"]
 
 
 def get_str(data: Dict[str, Any],
