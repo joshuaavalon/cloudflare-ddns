@@ -26,3 +26,10 @@ script:
       pylint cloudflare_ddns;
       pylint run.py;
     fi
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
