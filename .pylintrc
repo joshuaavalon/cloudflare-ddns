@@ -249,7 +249,10 @@ good-names=i,
            k,
            ex,
            Run,
-           _
+           _,
+           ip,
+           logger,
+           log_level
 
 # Include a hint for the correct naming format with invalid-name.
 include-naming-hint=no
@@ -297,8 +300,6 @@ variable-naming-style=snake_case
 
 
 [FORMAT]
-good-names=ip,logger,log_level
-
 # Expected format of line ending, e.g. empty (any line ending), LF or CRLF.
 expected-line-ending-format=LF
 
