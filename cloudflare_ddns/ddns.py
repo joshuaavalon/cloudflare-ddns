@@ -6,7 +6,7 @@ from urllib.parse import urljoin
 
 import requests
 
-from cloudflare_ddns import Configuration, \
+from cloudflare_ddns.configuration import Configuration, \
     SiteConfiguration
 from cloudflare_ddns.utils import get_str
 

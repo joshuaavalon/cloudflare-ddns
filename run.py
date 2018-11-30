@@ -21,7 +21,7 @@ dictConfig({
             "level": "NOTSET",
             "formatter": "standard",
             "class": "logging.StreamHandler",
-        },
+        }
     },
     "loggers": {
         "": {
@@ -29,7 +29,7 @@ dictConfig({
             "level": "WARNING",
             "propagate": True
         },
-        "joshuaavalon": {
+        "cloudflare_ddns": {
             "handlers": ["default"],
             "level": log_level,
             "propagate": False
@@ -75,9 +75,18 @@ def load_from_file() -> Optional[Configuration]:
 
 def load_from_env() -> Optional[Configuration]:
     try:
+        ttl = environ.get("TTL")
+        ttl = 1 if ttl is None else int(ttl)
+
+        proxied = environ.get("PROXIED", "")
+        if proxied is None:
+            proxied = True
+        else:
+            proxied = proxied.lower() in ("yes", "true", "1")
+
         site = SiteConfiguration(
-            proxied=environ.get("PROXIED", "").lower() in ("yes", "true", "1"),
-            ttl=int(environ.get("TTL")),
+            proxied=proxied,
+            ttl=ttl,
             email=environ.get("EMAIL"),
             api_key=environ.get("API_KEY"),
             zone=environ.get("ZONE"),
