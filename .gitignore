@@ -107,3 +107,4 @@ venv.bak/
 .pytest_cache/
 
 .idea
+!rootfs/var/
