@@ -4,27 +4,41 @@ python: 3.7
 stages:
   - test
   - build
-  - deploy
 jobs:
   include:
     - stage: test
       name: flake8
       install:
-        - pip install -r requirements.txt
+        - travis_retry pip install -r requirements.txt
         - travis_retry pip install -U flake8
       script:
         - flake8 --version
-        - flake8 cloudflare_ddns;
-        - flake8 run.py;
+        - flake8 cloudflare_ddns
+        - flake8 run.py
     - stage: test
       name: pylint
       install:
-        - pip install -r requirements.txt
+        - travis_retry pip install -r requirements.txt
         - travis_retry pip install -U pylint
       script:
         - pylint --version
-        - pylint cloudflare_ddns;
-        - pylint run.py;
+        - pylint cloudflare_ddns
+        - pylint run.py
+    - stage: build
+      name: mkdocs
+      if: branch = master
+      install:
+        - travis_retry pip install -U mkdocs mkdocs-material
+      script:
+        - mkdocs build
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: $GITHUB_TOKEN
+        keep-history: true
+        local_dir: str
+        on:
+          branch: master
 
 before_install:
   - deactivate
