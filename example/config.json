@@ -1,0 +1,20 @@
+{
+  "api_url": "https://api.cloudflare.com/client/v4/",
+  "ip_echo": [
+    "https://ipecho.net/plain",
+    "https://icanhazip.com/",
+    "https://tnx.nl/ip",
+    "http://whatismyip.akamai.com/"
+  ],
+  "config": [
+    {
+      "ip": null,
+      "proxied": true,
+      "ttl": 1,
+      "email": null,
+      "api_key": null,
+      "zone": null,
+      "domain": null
+    }
+  ]
+}
