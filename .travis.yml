@@ -18,13 +18,14 @@ jobs:
         - flake8 run.py;
     - stage: test
       name: pylint
-        install:
-          - pip install -r requirements.txt
-          - travis_retry pip install -U pylint
-        script:
-          - pylint --version
-          - pylint cloudflare_ddns;
-          - pylint run.py;
+      install:
+        - pip install -r requirements.txt
+        - travis_retry pip install -U pylint
+      script:
+        - pylint --version
+        - pylint cloudflare_ddns;
+        - pylint run.py;
+
 before_install:
   - deactivate
   - /opt/python/3.7.1/bin/python -m venv ~/venv
