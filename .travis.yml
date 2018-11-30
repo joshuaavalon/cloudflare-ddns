@@ -17,6 +17,10 @@ jobs:
         - flake8 run.py
     - stage: test
       name: pylint
+      before_install:
+        - deactivate
+        - /opt/python/3.7.1/bin/python -m venv ~/venv
+        - source ~/venv/bin/activate
       install:
         - travis_retry pip install -r requirements.txt
         - travis_retry pip install -U pylint
@@ -39,8 +43,3 @@ jobs:
         local-dir: site
         on:
           branch: master
-
-before_install:
-  - deactivate
-  - /opt/python/3.7.1/bin/python -m venv ~/venv
-  - source ~/venv/bin/activate
