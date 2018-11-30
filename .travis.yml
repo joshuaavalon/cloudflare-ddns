@@ -17,12 +17,12 @@ script:
   - |
     if [[ $TEST_TYPE == 'flake8' ]]; then
       flake8 --version
-      flake8 joshuaavalon;
+      flake8 cloudflare_ddns;
       flake8 run.py;
     fi
   - |
     if [[ $TEST_TYPE == 'pylint' ]]; then
       pylint --version
-      pylint joshuaavalon;
+      pylint cloudflare_ddns;
       pylint run.py;
     fi

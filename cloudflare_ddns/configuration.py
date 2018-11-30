@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
-from joshuaavalon.cloudflare_ddns.utils import enforce_types
+from cloudflare_ddns.utils import enforce_types
 
 __all__ = ["Configuration", "SiteConfiguration"]
 

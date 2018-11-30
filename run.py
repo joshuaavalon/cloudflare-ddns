@@ -5,8 +5,7 @@ from os import environ
 from pathlib import Path
 from typing import Optional
 
-from joshuaavalon.cloudflare_ddns import CloudflareDDNS, Configuration, \
-    SiteConfiguration
+from cloudflare_ddns import CloudflareDDNS, Configuration, SiteConfiguration
 
 log_level = environ.get("LOG_LEVEL", "INFO")
 dictConfig({

@@ -6,9 +6,9 @@ from urllib.parse import urljoin
 
 import requests
 
-from joshuaavalon.cloudflare_ddns.configuration import Configuration, \
+from cloudflare_ddns import Configuration, \
     SiteConfiguration
-from joshuaavalon.cloudflare_ddns.utils import get_str
+from cloudflare_ddns.utils import get_str
 
 logger = getLogger(__name__)
 __all__ = ["CloudflareDDNS"]
