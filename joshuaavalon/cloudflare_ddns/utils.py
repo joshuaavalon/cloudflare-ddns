@@ -1,10 +1,10 @@
 import inspect
 import json
-import typing
 from contextlib import suppress
 from functools import wraps
 from pathlib import Path
-from typing import Any, Dict, Optional
+# noinspection PyProtectedMember
+from typing import Any, Dict, Optional, _SpecialForm
 
 __all__ = ["load_json", "get_str", "enforce_types"]
 
@@ -35,14 +35,14 @@ def enforce_types(call):
                 type_hint = spec.annotations[name]
                 # No check for typing.Any, typing.Union, typing.ClassVar
                 # noinspection PyProtectedMember
-                if isinstance(type_hint, typing._SpecialForm):
+                if isinstance(type_hint, _SpecialForm):
                     continue
                 try:
                     actual_type = type_hint.__origin__
                 except AttributeError:
                     actual_type = type_hint
                 # noinspection PyProtectedMember
-                if isinstance(actual_type, typing._SpecialForm):
+                if isinstance(actual_type, _SpecialForm):
                     # case of typing.Union[…] or typing.ClassVar[…]
                     actual_type = type_hint.__args__
 

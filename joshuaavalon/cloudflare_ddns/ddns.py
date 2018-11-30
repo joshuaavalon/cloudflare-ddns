@@ -72,6 +72,7 @@ class CloudflareDDNS:
             except IOError:
                 logger.exception("IOError in get_ip")
                 continue
+        return None
 
     def get_zone_id(self, config: SiteConfiguration) -> Optional[str]:
         zone = config.zone

@@ -1,0 +1,28 @@
+dist: xenial
+language: python
+python: 3.7
+jobs:
+  include:
+    - env: TEST_TYPE=flake8
+    - env: TEST_TYPE=pylint
+before_install:
+  - deactivate
+  - /opt/python/3.7.1/bin/python -m venv ~/venv
+  - source ~/venv/bin/activate
+install:
+  - pip install -r requirements.txt
+  - if [[ $TEST_TYPE == 'flake8' ]]; then travis_retry pip install -U flake8; fi
+  - if [[ $TEST_TYPE == 'pylint' ]]; then travis_retry pip install -U pylint; fi
+script:
+  - |
+    if [[ $TEST_TYPE == 'flake8' ]]; then
+      flake8 --version
+      flake8 joshuaavalon;
+      flake8 run.py;
+    fi
+  - |
+    if [[ $TEST_TYPE == 'pylint' ]]; then
+      pylint --version
+      pylint joshuaavalon;
+      pylint run.py;
+    fi
