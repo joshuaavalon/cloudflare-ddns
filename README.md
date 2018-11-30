@@ -1,5 +1,11 @@
 # Cloudflare DDNS
 
+[![License](https://img.shields.io/github/license/joshuaavalon/cloudflare-ddns.svg)](https://github.com/joshuaavalon/cloudflare-ddns/blob/master/LICENSE) 
+[![Documentation Status](https://readthedocs.org/projects/aliceplex-schema/badge/?version=latest)](https://aliceplex-schema.readthedocs.io/en/latest/) 
+[![Test](https://img.shields.io/travis/joshuaavalon/cloudflare-ddns.svg)](https://travis-ci.org/joshuaavalon/cloudflare-ddns) 
+[![Maintainability](https://img.shields.io/codeclimate/maintainability/joshuaavalon/cloudflare-ddns.svg)](https://codeclimate.com/github/joshuaavalon/cloudflare-ddns)
+[![Known Vulnerabilities](https://snyk.io/test/github/joshuaavalon/cloudflare-ddns/badge.svg)](https://snyk.io/test/github/joshuaavalon/cloudflare-ddns)
+
 Cloudflare DDNS is a Python program that provides DDNS for Cloudflare via Cloudflare API v4.
 
 ## Requirement
