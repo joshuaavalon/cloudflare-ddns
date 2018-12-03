@@ -41,5 +41,16 @@ jobs:
         keep-history: true
         github-token: $GITHUB_TOKEN
         local-dir: site
-        on:
-          branch: master
+    - stage: deploy
+      name: docker
+      if: branch = master
+      script:
+        - docker build --tag "${DOCKER_IMAGE}:latest" .
+      before_deploy:
+        - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+        - if [ -n "$TRAVIS_TAG" ]; docker tag "${DOCKER_IMAGE}:latest" "${DOCKER_IMAGE}:${$TRAVIS_TAG}"; fi
+      deploy:
+        provider: script
+        script: |
+          docker push "${DOCKER_IMAGE}:latest"
+          if [ -n "$TRAVIS_TAG" ]; docker push "${DOCKER_IMAGE}:${$TRAVIS_TAG}"; fi

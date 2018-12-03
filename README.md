@@ -14,6 +14,8 @@ Cloudflare DDNS is a Python program that provides DDNS for Cloudflare via Cloudf
 
 ## Usage
 ### Using Docker
+```
+```
 
 ### Run directly
 1. Clone the git repository
@@ -42,6 +44,7 @@ You use environment variables if you want a quick setup and run only 1 DDNS.
 * `DOMAIN` - *require*:  Domain that you want to change (E.g. `foo.bar.com`)
 * `TTL`:  TTL of the DNS record (default: `1` which is automatic)
 * `PROXIED`:  Enable Cloudflare proxy for the DNS record (default: `true`)
+* `LOG_LEVEL`:  Logging level to standard output (default: `INFO`)
 
 ### Using JSON configuration file
 
