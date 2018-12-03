@@ -12,7 +12,6 @@ jobs:
         - travis_retry pip install -r requirements.txt
         - travis_retry pip install -U flake8
       script:
-        - flake8 --version
         - flake8 cloudflare_ddns
         - flake8 run.py
     - stage: test
@@ -25,22 +24,21 @@ jobs:
         - travis_retry pip install -r requirements.txt
         - travis_retry pip install -U pylint
       script:
-        - pylint --version
         - pylint cloudflare_ddns
         - pylint run.py
     - stage: deploy
       name: mkdocs
-      python: 3.6.7
+      dist: trusty
       if: branch = master
       install:
         - travis_retry pip install -U mkdocs mkdocs-material
-      before_deploy:
-        - mkdocs build --verbose --clean --strict
+      script:
+        - mkdocs build --clean --strict
       deploy:
         provider: pages
-        skip_cleanup: true
+        skip-cleanup: true
         keep-history: true
-        github_token: $GITHUB_TOKEN
-        local_dir: site
+        github-token: $GITHUB_TOKEN
+        local-dir: site
         on:
           branch: master
