@@ -47,8 +47,10 @@ jobs:
       script:
         - docker build --tag "${DOCKER_IMAGE}:latest" .
       before_deploy:
-        - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+        - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
         - if [ -n "$TRAVIS_TAG" ]; then docker tag "${DOCKER_IMAGE}:latest" "${DOCKER_IMAGE}:${$TRAVIS_TAG}"; fi
       deploy:
         provider: script
-        script: docker push "${DOCKER_IMAGE}:latest" && if [ -n "$TRAVIS_TAG" ]; then docker push "${DOCKER_IMAGE}:${$TRAVIS_TAG}"; fi
+        script: |
+          docker push "${DOCKER_IMAGE}:latest"
+          if [ -n "$TRAVIS_TAG" ]; then docker push "${DOCKER_IMAGE}:${TRAVIS_TAG}"; fi
