@@ -1,13 +1,9 @@
 dist: xenial
 language: python
 python: 3.7
-stages:
-  - test
-  - build
 jobs:
   include:
-    - stage: test
-      name: flake8
+    - name: flake8
       install:
         - travis_retry pip install -r requirements.txt
         - travis_retry pip install -U flake8
@@ -15,8 +11,7 @@ jobs:
         - flake8 --version
         - flake8 cloudflare_ddns
         - flake8 run.py
-    - stage: test
-      name: pylint
+    - name: pylint
       before_install:
         - deactivate
         - /opt/python/3.7.1/bin/python -m venv ~/venv
@@ -28,18 +23,14 @@ jobs:
         - pylint --version
         - pylint cloudflare_ddns
         - pylint run.py
-    - stage: build
-      name: mkdocs
-      if: branch = master
-      install:
-        - travis_retry pip install -U mkdocs mkdocs-material
-      script:
-        - mkdocs build
-      deploy:
-        provider: pages
-        skip-cleanup: true
-        github-token: $GITHUB_TOKEN
-        keep-history: true
-        local-dir: site
-        on:
-          branch: master
+before_deploy:
+  - travis_retry pip install -U mkdocs mkdocs-material
+  - mkdocs build
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  local-dir: site
+  on:
+    branch: master
