@@ -29,6 +29,7 @@ jobs:
     - stage: deploy
       name: mkdocs
       dist: trusty
+      python: 3.6.7
       if: branch = master
       install:
         - travis_retry pip install -U mkdocs mkdocs-material
