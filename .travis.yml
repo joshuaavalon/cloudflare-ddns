@@ -30,8 +30,17 @@ jobs:
         - pylint run.py
     - stage: deploy
       name: mkdocs
+      python: 3.6.7
       if: branch = master
       install:
         - travis_retry pip install -U mkdocs mkdocs-material
-      script:
-        - mkdocs gh-deploy -b "https://${GITHUB_TOKEN}@github.com/joshuaavalon/cloudflare-ddns.git"
+      before_deploy:
+        - mkdocs build --verbose --clean --strict
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        keep-history: true
+        github_token: $GITHUB_TOKEN
+        local_dir: site
+        on:
+          branch: master
