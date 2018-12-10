@@ -30,7 +30,6 @@ jobs:
       name: mkdocs
       dist: trusty
       python: 3.6.7
-      if: branch = master
       install:
         - travis_retry pip install -U mkdocs mkdocs-material
       script:
@@ -41,9 +40,10 @@ jobs:
         keep-history: true
         github-token: $GITHUB_TOKEN
         local-dir: site
+        on:
+          branch: master
     - stage: deploy
       name: docker
-      if: branch = master
       script:
         - docker build --tag "${DOCKER_IMAGE}:latest" .
       before_deploy:
@@ -52,3 +52,5 @@ jobs:
       deploy:
         provider: script
         script: docker push "${DOCKER_IMAGE}:latest" && if [ -n "$TRAVIS_TAG" ]; then docker push "${DOCKER_IMAGE}:${TRAVIS_TAG}"; fi
+        on:
+          branch: master
